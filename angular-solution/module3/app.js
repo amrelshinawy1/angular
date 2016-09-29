@@ -1,11 +1,11 @@
+
 (function () {
 'use strict';
 
 angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
 .service('MenuSearchService', MenuSearchService)
-.directive('shoppingList', ShoppingListDirective);
-
+.directive('foundItems', ShoppingListDirective);
 
 function ShoppingListDirective() {
   var ddo = {
@@ -13,84 +13,53 @@ function ShoppingListDirective() {
     scope: {
       items: '<',
       onRemove: '&'
-    },
-    controller: NarrowItDownController,
-    controllerAs: 'list',
-    bindToController: true,
-    link: ShoppingListDirectiveLink
+    }
+
   };
 
   return ddo;
 }
 
-   
-
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService) {
-  var menu = this;
+  var narrow = this;
+  narrow.found = [];
 
-  var found = MenuSearchService.getMatchedMenuItems();
-
-  promise.then(function (response) {
-    menu.categories = response.data;
-  })
-  .catch(function (error) {
-    console.log("Something went terribly wrong.");
-  });
-
-  menu.logMenuItems = function (shortName) {
-    var promise = MenuSearchService.getMenuForCategory(shortName);
-
+  narrow.getMatchedMenuItems =function () {
+    var promise =MenuSearchService.getMatchedMenuItems(narrow.searchTerm);
+    //var promise =MenuSearchService.getMenuItems();
     promise.then(function (response) {
-      console.log(response.data);
+      narrow.found = response;
     })
     .catch(function (error) {
-      console.log(error);
-    })
+      console.log("Something went terribly wrong.");
+    });
   };
-
-  found.removeItem = function (itemIndex) {
-    console.log("'this' is: ", this);
-    this.lastRemoved = "Last item removed was " + this.items[itemIndex].name;
-    shoppingList.removeItem(itemIndex);
-    this.title = origTitle + " (" + viewList.items.length + " items )";
-  };
+  narrow.removeItem = function (itemIndex) {
+   narrow.found.splice(itemIndex, 1);
+ };
 }
 
 
-MenuSearchService.$inject = ['$http', 'ApiBasePath']
-function MenuSearchService($http, ApiBasePath) {
+MenuSearchService.$inject = ['$http']
+function MenuSearchService($http) {
   var service = this;
 
-  service.getMenuCategories = function () {
-    var response = $http({
+  service.getMatchedMenuItems = function (searchTerm) {
+    return $http({
       method: "GET",
-      url: (ApiBasePath + "/categories.json")
-    });
-
-    return response;
-  };
-    
-  service.getMatchedMenuItems = function(searchTerm){
-       var response =  $http('https://davids-restaurant.herokuapp.com/menu_items.json').then(function (result) {
-      // process result and only keep items that match
-      var foundItems = response.data.indexOf(searchTerm);
-
-      // return processed items
-      return foundItems;
-  });
-  
-  };
-  service.getMenuForCategory = function (shortName) {
-    var response = $http({
-      method: "GET",
-      url: (ApiBasePath + "/menu_items.json"),
-      params: {
-        category: shortName
+      url: "https://davids-restaurant.herokuapp.com/menu_items.json"
+    }).then(function (response) {
+      var foundItems=[];
+      if(searchTerm!=""){
+        for(var i=0; i<response.data.menu_items.length; i++ ){
+          if(response.data.menu_items[i].description.indexOf(searchTerm) !== -1){
+            foundItems.push(response.data.menu_items[i]);
+          }
+        }
       }
+      return foundItems;
     });
-
-    return response;
   };
 
 }
