@@ -1,0 +1,14 @@
+<div class="container">
+
+
+    <h3 >Items in category</h3>
+
+<div class="">
+    <div class="item" ng-repeat="item in items.items">
+        <p ><span class="bold">Short name:</span> {{item.short_name}}</p>
+        <p ><span class="bold">Name:</span> {{item.name}}</p>
+        <p ng-if="item.description" ><span class="bold">Description:</span>{{item.description}}</p>
+        <p ><span class="bold">Price:</span>{{item.price_large}}</p>
+    
+      
+</div>

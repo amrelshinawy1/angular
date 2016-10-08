@@ -1,31 +1,43 @@
 <!doctype html>
-<html lang="en" ng-app='MenuApp'>
-  <head>
-    <title>Narrow Down Your Menu Choice</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/styles.css">
-      <link rel="stylesheet" href="styles/custom.css">
-  </head>
-<body>
-    
-    <ui-view>
-        <div class="container">
-            <a ui-sref="publicmenu"><h1>Menu</h1></a>
-        </div>
-    </ui-view>
+<html lang="en">
+<head>
+    <title>Restaurant Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body ng-app="MenuApp">
 
-  <script src="angular.min.js"></script>
-  <script src="angular-ui-router.min.js"></script>
-  <script src="data.module.js"></script>    
-  <script src="menuapp.module.js"></script>
-  <script src="menudata.service.js"></script>
-  <script src="categories.component.js"></script>        
-  <script src="items.component.js"></script>
-  <script src="routes.js"></script>  
-  <script src="MenuController.js"></script>    
-  <script src="MenuItemsController.js"></script>
-  
-    
+<div class="container">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li ui-sref-active="activeTab"><a ui-sref="home">Home</a></li>
+                <li ui-sref-active="activeTab"><a ui-sref="categories">Categories</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <ui-view></ui-view>
+
+</div>
+
+<script src="angular.min.js"></script>
+<script src="angular-ui-router.min.js"></script>
+
+<script src="src/menu/data.module.js"></script>
+<script src="src/menu/menuapp.module.js"></script>
+
+<script src="src/routes.js"></script>
+
+<script src="src/menu/api-base-path.constant.js"></script>
+<script src="src/menu/menudata.service.js"></script>
+
+<script src="src/menu/categories.component.js"></script>
+<script src="src/menu/categories.controller.js"></script>
+<script src="src/menu/items.component.js"></script>
+<script src="src/menu/items.controller.js"></script>
+
 </body>
 </html>
