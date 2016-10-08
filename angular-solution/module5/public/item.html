@@ -1,0 +1,21 @@
+<h1>item</h1>
+<div class="container">
+    
+  
+    <div ng-repeat="item in items.menu_items" class="menu-item-tile col-md-6">
+        <div class="row">
+        <div class="col-sm-5">
+          <div class="menu-item-photo">
+            <img  class="img-responsive" width="250" height="150" ng-src="https://ychaikin-course5.herokuapp.com/images/{{item.short_name}}.jpg" alt="err">
+          </div>
+          <div class="menu-item-price">{{item.price_small | currency}}<span> {{item.small_portion_name}}</span> {{item.price_large | currency}} <span>{{item.large_portion_name}}</span></div>
+        </div>
+        <div class="menu-item-description col-sm-7">
+          <h3 class="menu-item-title">{{item.name}}</h3>
+          <p class="menu-item-details">{{item.description}}</p>
+        </div>
+        </div>    
+        <hr class="visible-xs"> 
+    </div> 
+</div>  
+    
