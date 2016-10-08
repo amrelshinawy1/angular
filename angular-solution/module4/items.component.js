@@ -1,9 +1,9 @@
 (function () {
 "use strict";
 
-angular.module('public')
-.component('itemss', {
-  templateUrl: 'src/public/menu-item/menu-item.html',
+angular.module('MenuApp')
+.component('items', {
+  templateUrl: 'public/item.html',
   bindings: {
     menuItem: '<'
   },

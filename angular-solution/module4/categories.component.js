@@ -1,20 +1,14 @@
 (function () {
 "use strict";
 
-angular.module('public')
-.component('categories', {
-  templateUrl: 'src/public/menu-item/menu-item.html',
+angular.module('MenuApp')
+.component('menuCategory', {
+  templateUrl: 'public/menu.html',
   bindings: {
-    menuItem: '<'
-  },
-  controller: MenuItemController
+    category: '<'
+  }
 });
 
 
-MenuItemController.$inject = ['ApiPath'];
-function MenuItemController(ApiPath) {
-  var $ctrl = this;
-  $ctrl.basePath = ApiPath;
-}
 
 })();
