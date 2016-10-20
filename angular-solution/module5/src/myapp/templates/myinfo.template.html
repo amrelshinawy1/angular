@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+
+    <div ng-controller="MyInfoController as infoCtrl">
+      <h1>My Info</h1>
+
+      <div ng-show="infoCtrl.user">
+        First name: {{ infoCtrl.user.firstname }}
+      </div>
+
+      <div ng-show="infoCtrl.user">
+        Last name: {{ infoCtrl.user.lastname }}
+      </div>
+
+      <div ng-show="infoCtrl.user">
+        Email: {{ infoCtrl.user.email }}
+      </div>
+
+      <div ng-show="infoCtrl.user">
+        Phone: {{ infoCtrl.user.phone }}
+      </div>
+
+      <div ng-show="infoCtrl.item">
+        Favourite dish: {{ infoCtrl.item.name }}
+      </div>
+
+      <div ng-show="infoCtrl.item">
+        Description: {{ infoCtrl.item.description }}
+      </div>
+
+      <div ng-show="infoCtrl.item">
+        <img src="https://module5-solution.herokuapp.com/images/{{ infoCtrl.item.short_name }}.jpg">
+      </div>
+
+      <div ng-hide="infoCtrl.user">
+        Not Signed Up Yet. <a ui-sref="signup">Sign up Now!</a>
+      </div>
+
+    </div>
+  </div>
+</div>
